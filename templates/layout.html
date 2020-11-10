@@ -27,13 +27,50 @@
       <li class="nav-item">
         <a class="nav-link" href="{{ url_for('about') }}">About</a>
       </li>
+
+      {% if current_user.is_authenticated%}
+
+      <li class="nav-item">
+        <a class="nav-link" href="{{ url_for('logout') }}">logout</a>
+      </li>
+
+      {% else %}
+
+        <li   class="nav-item  navbar-right">
+          <a class="nav-link" href="{{ url_for('register') }}">Register</a>
+        </li>
+
+        <li  class="nav-item  navbar-right">
+          <a class="nav-link" href="{{ url_for('login') }}">Login</a>
+        </li>
+      {% endif %}
+
+
+
+  
+
+
+
     
     </ul>
   </div>
 </nav>
+<div class="col-md-8">
+          {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+              {% for category, message in messages %}
+                <div class="alert alert-{{ category }}">
+                  {{ message }}
+                </div>
+              {% endfor %}
+            {% endif %}
+          {% endwith %}
+    </div>
 
+  {% if home%}
     <img src="static/BreastCancerjpg.jpg" class="img-fluid"  style="vertical-align:middle;margin:50px 550px" alt="Breast Cancer img">
-    
+  {% endif %}
+
     {%block content %} {% endblock %}
 
 

@@ -5,11 +5,25 @@
 
 <br>
 
+ {% if current_user.is_authenticated%}
 
 <form method="POST" enctype="multipart/form-data" align='center'>
 	{{form.csrf_token}}
 	{{form.image}}
+
+	<br>
+	{{form.username.label}}
+	{{form.username}}
+
+	<br>
 	<button type="submit">Upload</button>
 </form>
 
+{% else %}
+	<center>
+    <a class="btn btn-primary" href="/login" role="button">Login First</a>
+</center>
+
+
+{% endif %}
 {% endblock content%}
